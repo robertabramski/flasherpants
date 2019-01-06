@@ -8,6 +8,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'script.js'
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  },
+  resolve: {
+    alias: {
+      views: path.resolve(__dirname, 'src/views'),
+      components: path.resolve(__dirname, 'src/components')
+    }
+  },
   module: {
     rules: [
       {
