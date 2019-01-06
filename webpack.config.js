@@ -24,7 +24,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: 'global',
               camelCase: true,
               localIdentName: '[folder]-[local]'
             }
@@ -32,8 +32,9 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              data: '@import "src/index.scss";',
               includePaths: [
-                path.resolve(__dirname, 'src/styles')
+                path.resolve(__dirname, 'src/theme')
               ]
             }
           }

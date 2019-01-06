@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$body-bg: $white !default;
+$body-color: $gray-900 !default;
+
+$theme-colors: (
+  'light': $gray-100,
+  'dark': $gray-800,
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger
+);
