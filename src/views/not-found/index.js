@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './style.scss';
 
-export default class AnotherPage extends React.Component {
+export default class NotFound extends React.Component {
   render() {
     return (
       <div className={css.module}>
