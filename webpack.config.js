@@ -14,7 +14,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      views: path.resolve(__dirname, 'src/views'),
+      pages: path.resolve(__dirname, 'src/pages'),
       components: path.resolve(__dirname, 'src/components')
     }
   },

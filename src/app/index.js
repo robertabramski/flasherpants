@@ -1,9 +1,9 @@
 import React from 'react';
 import css from './style.scss';
 
-import Home from 'views/home';
-import Demo from 'views/demo';
-import NotFound from 'views/not-found';
+import Home from 'pages/home';
+import Demo from 'pages/demo';
+import NotFound from 'pages/not-found';
 import { Route, Switch } from 'react-router-dom';
 
 export default class App extends React.Component {
