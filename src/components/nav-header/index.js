@@ -43,8 +43,8 @@ export default class NavHeader extends React.Component {
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>Components</DropdownToggle>
                 <DropdownMenu right>
-                  <LinkContainer to="/page">
-                    <DropdownItem>Page</DropdownItem>
+                  <LinkContainer to="/demo">
+                    <DropdownItem>Demo</DropdownItem>
                   </LinkContainer>
                   <DropdownItem divider />
                   <LinkContainer to="/no-page">
