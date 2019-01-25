@@ -6,6 +6,8 @@ export default class Demo extends React.Component {
     super(props);
 
     document.title = 'Demo';
+  componentDidMount() {
+    document.title = 'Flasherpants Demo';
   }
 
   render() {

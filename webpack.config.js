@@ -54,7 +54,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Welcome to Flasherpants',
+      title: 'Loading',
       filename: 'index.html',
       meta: {
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
