@@ -1,7 +1,7 @@
 {
   "name": "flasherpants",
   "version": "0.1.0",
-  "description": "Modular React and Sass SPA boilerplate.",
+  "description": "Modular Reactstrap and Sass SPA boilerplate.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",

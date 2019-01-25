@@ -1,3 +1,3 @@
 # Flasherpants
 
-Modular React and Sass SPA boilerplate.
+Modular Reactstrap and Sass SPA boilerplate.
