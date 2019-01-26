@@ -34,10 +34,20 @@ export { HeightAwareNavFixed as NavFixed };
 
 export class Buttons extends React.Component {
   render() {
-    let {vertical, color, ...props} = this.props;
-    let classNames = require('classnames')({
+    let {vertical, spacing, spacingBottom, color, ...props} = this.props;
+    let classNames = require('classnames');
+    let parentClassNames, childClassNames;
+
+    parentClassNames = classNames({
       [css.buttonsModule]: true,
-      'btn-group-vertical': vertical
+      'btn-group-vertical': vertical,
+    });
+
+    childClassNames = classNames({
+      [`mr-${spacing}`]: (typeof spacing === 'number'),
+      [`mb-${spacing}`]: (spacingBottom === true),
+      [`mb-${spacingBottom}`]: (typeof spacingBottom === 'number'),
+      'rounded': vertical
     });
 
     if(typeof color === 'string') {
@@ -45,11 +55,11 @@ export class Buttons extends React.Component {
     }
 
     return (
-      <div className={classNames}>
+      <div className={parentClassNames}>
         {
           this.props.children.map((child, i) => {
             return (
-              <Button key={i} {...child.props} {...props}>
+              <Button key={i} {...child.props} {...props} className={childClassNames}>
                 {child.props.children}
               </Button>
             );
@@ -62,14 +72,20 @@ export class Buttons extends React.Component {
 
 export class ButtonsGroup extends React.Component {
   render() {
-    let {vertical, color, ...props} = this.props;
+    let {vertical, spacing, spacingBottom, color, ...props} = this.props;
+    let classNames = require('classnames')({
+      [css.buttonsGroupModule]: true,
+      [`mr-${spacing}`]: (typeof spacing === 'number'),
+      [`mb-${spacing}`]: (spacingBottom === true),
+      [`mb-${spacingBottom}`]: (typeof spacingBottom === 'number')
+    });
 
     if(typeof color === 'string') {
       props.color = color;
     }
 
     return (
-      <ButtonGroup vertical={vertical} className={css.buttonsGroupModule}>
+      <ButtonGroup vertical={vertical} className={classNames}>
         {
           this.props.children.map((child, i) => {
             return (

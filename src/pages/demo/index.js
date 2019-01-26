@@ -2,7 +2,7 @@ import React from 'react';
 import css from './style.scss';
 
 import { Container, Row, Col } from 'reactstrap';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { TabContent, TabPane } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
@@ -17,7 +17,9 @@ export default class Demo extends React.Component {
       disabled: false,
       outline: false,
       size: 'md',
-      vertical: false
+      vertical: false,
+      spacing: 2,
+      spacingBottom: true
     },
     nav: {
       fixed: 'top'
@@ -31,17 +33,18 @@ export default class Demo extends React.Component {
   render() {
     return (
       <Container fluid={true} className={css.module}>
-        <NavFixed fixed={this.state.nav.fixed} brand="Flasherpants Demo">
-          <Buttons size="sm" color="primary">
+        <NavFixed fixed={this.state.nav.fixed} color="dark">
+          <NavbarBrand color="light">Flasherpants</NavbarBrand>
+          <Buttons size="sm" color="light" spacing={2}>
             <Button>Here</Button>
             <Button>Here</Button>
             <Button>Here</Button>
           </Buttons>
-          <Buttons size="lg" color="danger">
+          <ButtonsGroup size="lg" color="danger">
             <Button>Here</Button>
             <Button>Here</Button>
             <Button>Here</Button>
-          </Buttons>
+          </ButtonsGroup>
         </NavFixed>
         <h2>Buttons</h2>
         <Row noGutters={false}>
@@ -52,7 +55,9 @@ export default class Demo extends React.Component {
               disabled={this.state.buttons.disabled}
               outline={this.state.buttons.outline}
               size={this.state.buttons.size}
-              vertical={this.state.buttons.vertical}>
+              vertical={this.state.buttons.vertical}
+              spacing={this.state.buttons.spacing}
+              spacingBottom={this.state.buttons.spacingBottom}>
               <Button color="primary">Primary</Button>
               <Button color="secondary">Secondary</Button>
               <Button color="success">Success</Button>
@@ -67,7 +72,9 @@ export default class Demo extends React.Component {
               disabled={this.state.buttons.disabled}
               outline={this.state.buttons.outline}
               size={this.state.buttons.size}
-              vertical={this.state.buttons.vertical}>
+              vertical={this.state.buttons.vertical}
+              spacing={this.state.buttons.spacing}
+              spacingBottom={this.state.buttons.spacingBottom}>
               <Button color="success">Left</Button>
               <Button color="warning">Middle</Button>
               <Button color="danger">Right</Button>

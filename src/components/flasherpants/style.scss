@@ -8,38 +8,22 @@
 
 :local(.nav-fixed-module) {
   [class$="buttons-module"] [class^="btn"] {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 }
 
 :local(.buttons-module) {
-  &.btn-group-vertical {
-    margin-right: $spacer/2;
-
-    .btn {
-      margin: 0 0 $spacer/2;
-
-      @if $enable-rounded {
-        border-radius: $btn-border-radius !important;
-      }
-    }
-  }
+  display: inline-block;
 
   .btn {
-    margin: 0 $spacer/4 $spacer/2;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
     &:last-child {
-      margin-right: 0;
+      margin-right: 0 !important;
     }
   }
 }
 
 :local(.buttons-group-module) {
-  .btn:last-child {
-    margin-right: $spacer/2;
+  &:last-child {
+    margin-right: 0;
   }
 }
