@@ -2,11 +2,11 @@ import React from 'react';
 import css from './style.scss';
 
 import { Container, Row, Col } from 'reactstrap';
-import { Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
+import { Navbar, Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { TabContent, TabPane } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
-import { NavFixed } from 'components/flasherpants';
+import { NavbarFixed } from 'components/flasherpants';
 import { Buttons, ButtonsGroup } from 'components/flasherpants';
 
 export default class Demo extends React.Component {
@@ -22,7 +22,10 @@ export default class Demo extends React.Component {
       spacingBottom: true
     },
     nav: {
-      fixed: 'top'
+      color: 'dark',
+      fixed: 'top',
+      height: 65,
+      spacing: 3
     }
   };
 
@@ -33,8 +36,12 @@ export default class Demo extends React.Component {
   render() {
     return (
       <Container fluid={true} className={css.module}>
-        <NavFixed fixed={this.state.nav.fixed} color="dark">
-          <NavbarBrand color="light">Flasherpants</NavbarBrand>
+        <NavbarFixed
+          fixed={this.state.nav.fixed}
+          color={this.state.nav.color}
+          height={this.state.nav.height}
+          spacing={this.state.nav.spacing}>
+          <NavbarBrand color="dark">Flasherpants</NavbarBrand>
           <Buttons size="sm" color="light" spacing={2}>
             <Button>Here</Button>
             <Button>Here</Button>
@@ -45,7 +52,7 @@ export default class Demo extends React.Component {
             <Button>Here</Button>
             <Button>Here</Button>
           </ButtonsGroup>
-        </NavFixed>
+        </NavbarFixed>
         <h2>Buttons</h2>
         <Row noGutters={false}>
           <Col>
@@ -66,6 +73,7 @@ export default class Demo extends React.Component {
               <Button color="danger">Danger</Button>
               <Button color="link">Link</Button>
             </Buttons>
+            <br />
             <ButtonsGroup
               color={this.state.buttons.color}
               active={this.state.buttons.active}

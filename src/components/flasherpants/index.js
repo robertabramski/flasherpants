@@ -1,36 +1,63 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './style.scss';
 
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
-import withSize from 'react-sizeme';
 import units from 'units-css';
 
-class NavFixedComponent extends React.Component {
+function convertSpacerMapToObject(spacersMap) {
+  let cssUnits = 'rem';
+  let kvRegex = new RegExp(`([0-9]): ([0-9/.${cssUnits}]+)`, 'g');
+  let spacersMapObject = new Object();
+
+  spacersMap.match(kvRegex).forEach(kv => {
+    let k = kv.split(':')[0];
+    let v = kv.split(':')[1].trim();
+
+    spacersMapObject[k] = v;
+  });
+
+  return spacersMapObject;
+}
+
+export class NavbarFixed extends React.Component {
   render() {
-    let navHeight = this.props.size.height;
-    let navPadding = units.convert('px', css.navFixedModulePadding);
+    let style, classNames;
+    let navHeight = this.props.height;
     let fixed = this.props.fixed || 'top';
-    let color = this.props.color || 'light';
-    let classNames = require('classnames')({
+    let color = this.props.color || 'dark';
+    let spacing = this.props.spacing;
+    let spacersMap = convertSpacerMapToObject(css.spacersMap);
+    let navPadding = spacing === 0 ? 0 : units.convert('px', spacersMap[spacing]);
+
+    style = {
+      height: navHeight
+    };
+
+    classNames = require('classnames')({
       [css.navFixedModule]: true
     });
 
-    document.body.style.paddingTop = `${navHeight + navPadding}px`;
+    if(fixed === 'top') {
+      document.body.style.paddingTop = `${navHeight + navPadding}px`;
+    }
 
     return (
-      <Navbar className={classNames} fixed={fixed} color={color}>
-        <NavbarBrand>{this.props.brand}</NavbarBrand>
+      <Navbar {...this.props} className={classNames} fixed={fixed} style={style}>
         {this.props.children}
       </Navbar>
     );
   }
 }
 
-const HeightAwareHoc = withSize({monitorWidth: false, monitorHeight: true});
-const HeightAwareNavFixed = HeightAwareHoc(NavFixedComponent);
-export { HeightAwareNavFixed as NavFixed };
+NavbarFixed.propTypes = {
+  fixed: PropTypes.oneOf(['top', 'bottom']),
+  color: PropTypes.string,
+  height: PropTypes.number.isRequired,
+  spacing: PropTypes.number
+};
 
 export class Buttons extends React.Component {
   render() {

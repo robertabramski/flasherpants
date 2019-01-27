@@ -1,9 +1,5 @@
 :export {
-  navFixedModulePadding: $spacer;
-}
-
-[class*="erd_scroll_detection_container"] {
-  position: absolute;
+  spacersMap: #{$spacers};
 }
 
 :local(.nav-fixed-module) {
