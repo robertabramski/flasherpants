@@ -126,3 +126,17 @@ export class ButtonsGroup extends React.Component {
     );
   }
 }
+
+Buttons.propTypes =
+ButtonsGroup.propTypes = {
+  vertical: PropTypes.bool,
+  spacing: PropTypes.number,
+  spacingBottom: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number
+  ]),
+  color: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ])
+};
