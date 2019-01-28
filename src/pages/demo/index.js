@@ -6,11 +6,16 @@ import { Navbar, Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { TabContent, TabPane } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
+import { Containment } from 'components/flasherpants';
 import { NavbarFixed } from 'components/flasherpants';
 import { Buttons, ButtonsGroup } from 'components/flasherpants';
 
 export default class Demo extends React.Component {
   state = {
+    containment: {
+      fluid: true,
+      padded: true
+    },
     buttons: {
       color: false,
       active: false,
@@ -35,7 +40,9 @@ export default class Demo extends React.Component {
 
   render() {
     return (
-      <Container fluid={true} className={css.module}>
+      <Containment className={css.module}
+        fluid={this.state.containment.fluid}
+        padded={this.state.containment.padded}>
         <NavbarFixed
           fixed={this.state.nav.fixed}
           color={this.state.nav.color}
@@ -89,7 +96,7 @@ export default class Demo extends React.Component {
             </ButtonsGroup>
           </Col>
         </Row>
-      </Container>
+      </Containment>
     );
   }
 }

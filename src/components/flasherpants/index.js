@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './style.scss';
 
+import { Container } from 'reactstrap';
 import { Navbar } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
@@ -21,6 +22,33 @@ function convertSpacerMapToObject(spacersMap) {
 
   return spacersMapObject;
 }
+
+export class Containment extends React.Component {
+  render() {
+    let classNames;
+    let { padded, spacing, ...props} = this.props;
+
+    if(padded === undefined) {
+      padded = true;
+    }
+
+    classNames = require('classnames')({
+      [css.containmentModule]: true,
+      'p-0': !padded
+    });
+
+    return (
+      <Container {...props} className={classNames}>
+        {this.props.children}
+      </Container>
+    );
+  }
+}
+
+Containment.propTypes = {
+  padded: PropTypes.bool,
+  spacing: PropTypes.number
+};
 
 export class NavbarFixed extends React.Component {
   render() {
