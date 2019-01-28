@@ -26,7 +26,7 @@ function convertSpacerMapToObject(spacersMap) {
 export class Containment extends React.Component {
   render() {
     let classNames;
-    let { padded, spacing, ...props} = this.props;
+    let { padded, spacingOuter, ...props} = this.props;
 
     if(padded === undefined) {
       padded = true;
@@ -34,8 +34,8 @@ export class Containment extends React.Component {
 
     classNames = require('classnames')({
       [css.containmentModule]: true,
-      'px-0': !padded,
-      [`px-${spacing}`]: padded && (typeof spacing === 'number')
+      [`px-${spacingOuter}`]: padded && (typeof spacingOuter === 'number'),
+      'px-0': !padded
     });
 
     return (
@@ -48,25 +48,26 @@ export class Containment extends React.Component {
 
 Containment.propTypes = {
   padded: PropTypes.bool,
-  spacing: PropTypes.number
+  spacingOuter: PropTypes.number
 };
 
 export class NavbarFixed extends React.Component {
   render() {
+    let { spacingOuter, spacingBottom, ...props } = this.props;
     let style, classNames;
     let navHeight = this.props.height;
     let fixed = this.props.fixed || 'top';
     let color = this.props.color || 'dark';
-    let spacing = this.props.spacing;
     let spacersMap = convertSpacerMapToObject(css.spacersMap);
-    let navPadding = spacing === 0 ? 0 : units.convert('px', spacersMap[spacing]);
+    let navPadding = spacingBottom === 0 ? 0 : units.convert('px', spacersMap[spacingBottom]);
 
     style = {
       height: navHeight
     };
 
     classNames = require('classnames')({
-      [css.navFixedModule]: true
+      [css.navFixedModule]: true,
+      [`px-${spacingOuter}`]: (typeof spacingOuter === 'number')
     });
 
     if(fixed === 'top') {
@@ -74,7 +75,7 @@ export class NavbarFixed extends React.Component {
     }
 
     return (
-      <Navbar {...this.props} className={classNames} fixed={fixed} style={style}>
+      <Navbar {...props} className={classNames} fixed={fixed} style={style}>
         {this.props.children}
       </Navbar>
     );
@@ -85,7 +86,8 @@ NavbarFixed.propTypes = {
   fixed: PropTypes.oneOf(['top', 'bottom']),
   color: PropTypes.string,
   height: PropTypes.number.isRequired,
-  spacing: PropTypes.number
+  spacingBottom: PropTypes.number,
+  spacingOuter: PropTypes.number
 };
 
 export class Buttons extends React.Component {

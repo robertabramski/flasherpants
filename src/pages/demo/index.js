@@ -15,7 +15,7 @@ export default class Demo extends React.Component {
     containment: {
       fluid: true,
       padded: true,
-      spacing: 5
+      spacingOuter: 5
     },
     buttons: {
       color: false,
@@ -31,7 +31,8 @@ export default class Demo extends React.Component {
       color: 'dark',
       fixed: 'top',
       height: 65,
-      spacing: 5
+      spacingBottom: 5,
+      spacingOuter: 5
     }
   };
 
@@ -44,12 +45,13 @@ export default class Demo extends React.Component {
       <Containment className={css.module}
         fluid={this.state.containment.fluid}
         padded={this.state.containment.padded}
-        spacing={this.state.containment.spacing}>
+        spacingOuter={this.state.containment.spacingOuter}>
         <NavbarFixed
           fixed={this.state.nav.fixed}
           color={this.state.nav.color}
           height={this.state.nav.height}
-          spacing={this.state.nav.spacing}>
+          spacingBottom={this.state.nav.spacingBottom}
+          spacingOuter={this.state.nav.spacingOuter}>
           <NavbarBrand color="dark">Flasherpants</NavbarBrand>
           <Buttons size="sm" color="light" spacing={2}>
             <Button>Here</Button>
