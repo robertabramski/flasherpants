@@ -34,7 +34,8 @@ export class Containment extends React.Component {
 
     classNames = require('classnames')({
       [css.containmentModule]: true,
-      'p-0': !padded
+      'px-0': !padded,
+      [`px-${spacing}`]: padded && (typeof spacing === 'number')
     });
 
     return (
