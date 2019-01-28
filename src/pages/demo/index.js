@@ -15,7 +15,7 @@ export default class Demo extends React.Component {
     containment: {
       fluid: true,
       padded: true,
-      spacingOuter: 5
+      spacingOuter: 3
     },
     buttons: {
       color: false,
@@ -27,12 +27,22 @@ export default class Demo extends React.Component {
       spacing: 2,
       spacingBottom: true
     },
-    nav: {
+    buttonsGroup: {
+      color: false,
+      active: false,
+      disabled: false,
+      outline: false,
+      size: 'md',
+      vertical: false,
+      spacing: 2,
+      spacingBottom: true
+    },
+    navbarFixed: {
       color: 'dark',
       fixed: 'top',
       height: 65,
-      spacingBottom: 5,
-      spacingOuter: 5
+      spacingBottom: 2,
+      spacingOuter: 3
     }
   };
 
@@ -47,11 +57,11 @@ export default class Demo extends React.Component {
         padded={this.state.containment.padded}
         spacingOuter={this.state.containment.spacingOuter}>
         <NavbarFixed
-          fixed={this.state.nav.fixed}
-          color={this.state.nav.color}
-          height={this.state.nav.height}
-          spacingBottom={this.state.nav.spacingBottom}
-          spacingOuter={this.state.nav.spacingOuter}>
+          fixed={this.state.navbarFixed.fixed}
+          color={this.state.navbarFixed.color}
+          height={this.state.navbarFixed.height}
+          spacingBottom={this.state.navbarFixed.spacingBottom}
+          spacingOuter={this.state.navbarFixed.spacingOuter}>
           <NavbarBrand color="dark">Flasherpants</NavbarBrand>
           <Buttons size="sm" color="light" spacing={2}>
             <Button>Here</Button>
@@ -86,14 +96,14 @@ export default class Demo extends React.Component {
             </Buttons>
             <br />
             <ButtonsGroup
-              color={this.state.buttons.color}
-              active={this.state.buttons.active}
-              disabled={this.state.buttons.disabled}
-              outline={this.state.buttons.outline}
-              size={this.state.buttons.size}
-              vertical={this.state.buttons.vertical}
-              spacing={this.state.buttons.spacing}
-              spacingBottom={this.state.buttons.spacingBottom}>
+              color={this.state.buttonsGroup.color}
+              active={this.state.buttonsGroup.active}
+              disabled={this.state.buttonsGroup.disabled}
+              outline={this.state.buttonsGroup.outline}
+              size={this.state.buttonsGroup.size}
+              vertical={this.state.buttonsGroup.vertical}
+              spacing={this.state.buttonsGroup.spacing}
+              spacingBottom={this.state.buttonsGroup.spacingBottom}>
               <Button color="success">Left</Button>
               <Button color="warning">Middle</Button>
               <Button color="danger">Right</Button>
