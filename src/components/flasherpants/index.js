@@ -58,8 +58,9 @@ export class NavbarFixed extends React.Component {
     let navHeight = this.props.height;
     let fixed = this.props.fixed || 'top';
     let color = this.props.color || 'dark';
+    let convertSpacingToPx = () => units.convert('px', spacersMap[spacingBottom]);
     let spacersMap = convertSpacerMapToObject(css.spacersMap);
-    let navPadding = spacingBottom === 0 ? 0 : units.convert('px', spacersMap[spacingBottom]);
+    let navPadding = spacingBottom === (0 || undefined) ? 0 : convertSpacingToPx();
 
     style = {
       height: navHeight
