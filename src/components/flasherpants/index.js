@@ -8,19 +8,19 @@ import { Button, ButtonGroup } from 'reactstrap';
 
 import units from 'units-css';
 
-function convertSpacerMapToObject(spacersMap) {
-  let cssUnits = 'rem';
-  let kvRegex = new RegExp(`([0-9]): ([0-9/.${cssUnits}]+)`, 'g');
-  let spacersMapObject = new Object();
+function convertMapToObject(map) {
+  let chars = '%0-9a-z\.';
+  let kvRegex = new RegExp(`([${chars}]+): ([${chars}]+)`, 'g');
+  let mapObject = new Object();
 
-  spacersMap.match(kvRegex).forEach(kv => {
+  map.match(kvRegex).forEach(kv => {
     let k = kv.split(':')[0];
     let v = kv.split(':')[1].trim();
 
-    spacersMapObject[k] = v;
+    mapObject[k] = v;
   });
 
-  return spacersMapObject;
+  return mapObject;
 }
 
 export class Containment extends React.Component {
@@ -59,7 +59,7 @@ export class NavbarFixed extends React.Component {
     let fixed = this.props.fixed || 'top';
     let color = this.props.color || 'dark';
     let convertSpacingToPx = () => units.convert('px', spacersMap[spacingBottom]);
-    let spacersMap = convertSpacerMapToObject(css.spacersMap);
+    let spacersMap = convertMapToObject(css.spacersMap);
     let navPadding = spacingBottom === (0 || undefined) ? 0 : convertSpacingToPx();
 
     style = {
