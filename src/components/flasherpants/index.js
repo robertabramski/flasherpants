@@ -71,9 +71,7 @@ export class NavbarFixed extends React.Component {
       [`px-${spacingOuter}`]: (typeof spacingOuter === 'number')
     });
 
-    if(fixed === 'top') {
-      document.body.style.paddingTop = `${navHeight + navPadding}px`;
-    }
+    document.body.style.paddingTop = (fixed === 'top' ? `${navHeight + navPadding}px`: 0);
 
     return (
       <Navbar {...props} className={classNames} fixed={fixed} style={style}>

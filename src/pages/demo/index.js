@@ -10,6 +10,8 @@ import { Containment } from 'components/flasherpants';
 import { NavbarFixed } from 'components/flasherpants';
 import { Buttons, ButtonsGroup } from 'components/flasherpants';
 
+import update from 'immutability-helper';
+
 export default class Demo extends React.Component {
   state = {
     containment: {
@@ -50,6 +52,16 @@ export default class Demo extends React.Component {
     document.title = 'Flasherpants Demo';
   }
 
+  updateDisplay = (target, value) => event => {
+    let parts = target.split('.');
+    let component = parts[0], prop = parts[1];
+    let newState = update(this.state, {
+      [component]: {[prop]: {$set: value}}
+    });
+
+    this.setState({[component]: newState[component]});
+  }
+
   render() {
     return (
       <Containment className={css.module}
@@ -62,17 +74,19 @@ export default class Demo extends React.Component {
           height={this.state.navbarFixed.height}
           spacingBottom={this.state.navbarFixed.spacingBottom}
           spacingOuter={this.state.navbarFixed.spacingOuter}>
-          <NavbarBrand color="dark">Flasherpants</NavbarBrand>
-          <Buttons size="sm" color="light" spacing={2}>
-            <Button>Here</Button>
-            <Button>Here</Button>
-            <Button>Here</Button>
-          </Buttons>
-          <ButtonsGroup size="lg" color="danger">
-            <Button>Here</Button>
-            <Button>Here</Button>
-            <Button>Here</Button>
-          </ButtonsGroup>
+          <NavbarBrand>NavFixed</NavbarBrand>
+          <div>
+            <ButtonsGroup size="md" color="gray-600">
+              <Button
+                onClick={this.updateDisplay('navbarFixed.fixed', 'top')}
+                active={this.state.navbarFixed.fixed === 'top'}>Top
+              </Button>
+              <Button
+                onClick={this.updateDisplay('navbarFixed.fixed', 'bottom')}
+                active={this.state.navbarFixed.fixed === 'bottom'}>Bottom
+              </Button>
+            </ButtonsGroup>
+          </div>
         </NavbarFixed>
         <h2>Buttons</h2>
         <Row noGutters={false}>
