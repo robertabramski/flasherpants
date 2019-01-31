@@ -3,12 +3,14 @@ import css from './style.scss';
 
 import { Container, Row, Col } from 'reactstrap';
 import { Navbar, Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
+import { Form, FormGroup, Input, Label } from 'reactstrap';
 import { TabContent, TabPane } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
 
 import { Containment } from 'components/flasherpants';
 import { NavbarFixed } from 'components/flasherpants';
 import { Buttons, ButtonsGroup } from 'components/flasherpants';
+import { FormInline } from 'components/flasherpants';
 
 import update from 'immutability-helper';
 
@@ -30,7 +32,7 @@ export default class Demo extends React.Component {
       spacingBottom: true
     },
     buttonsGroup: {
-      color: false,
+      color: 'primary',
       active: false,
       disabled: false,
       outline: false,
@@ -39,12 +41,15 @@ export default class Demo extends React.Component {
       spacing: 2,
       spacingBottom: true
     },
+    formInline: {
+      spacing: 2
+    },
     navbarFixed: {
       color: 'dark',
       fixed: 'top',
       height: 65,
-      spacingBottom: 2,
-      spacingOuter: 3
+      spacingBottom: undefined,
+      spacingOuter: undefined
     }
   };
 
@@ -55,8 +60,28 @@ export default class Demo extends React.Component {
   updateDisplay = (target, value) => event => {
     let parts = target.split('.');
     let component = parts[0], prop = parts[1];
-    let newState = update(this.state, {
-      [component]: {[prop]: {$set: value}}
+    let newState, eventValue;
+
+    if(!value) {
+      switch(event.target.type) {
+        case 'number':
+          //let min = parseInt(event.target.min), max = parseInt(event.target.max);
+          let val = parseInt(event.target.value);
+
+          if(isNaN(val)) {
+            event.preventDefault();
+            return false;
+          }
+          else eventValue = val;
+
+        break;
+
+        default: eventValue = parseInt(event.target.value);
+      }
+    }
+
+    newState = update(this.state, {
+      [component]: {[prop]: {$set: value || eventValue}}
     });
 
     this.setState({[component]: newState[component]});
@@ -75,7 +100,18 @@ export default class Demo extends React.Component {
           spacingBottom={this.state.navbarFixed.spacingBottom}
           spacingOuter={this.state.navbarFixed.spacingOuter}>
           <NavbarBrand>NavFixed</NavbarBrand>
-          <div>
+          <FormInline
+            spacing={this.state.formInline.spacing}
+            onSubmit={event => event.preventDefault()}>
+            <FormGroup>
+              <Label for="height">Height</Label>
+              <Input
+                name="height"
+                type="number"
+                min="50" max="100"
+                value={this.state.navbarFixed.height}
+                onChange={this.updateDisplay('navbarFixed.height')} />
+            </FormGroup>
             <ButtonsGroup size="md" color="gray-600">
               <Button
                 onClick={this.updateDisplay('navbarFixed.fixed', 'top')}
@@ -86,7 +122,7 @@ export default class Demo extends React.Component {
                 active={this.state.navbarFixed.fixed === 'bottom'}>Bottom
               </Button>
             </ButtonsGroup>
-          </div>
+          </FormInline>
         </NavbarFixed>
         <h2>Buttons</h2>
         <Row noGutters={false}>
@@ -108,7 +144,6 @@ export default class Demo extends React.Component {
               <Button color="danger">Danger</Button>
               <Button color="link">Link</Button>
             </Buttons>
-            <br />
             <ButtonsGroup
               color={this.state.buttonsGroup.color}
               active={this.state.buttonsGroup.active}

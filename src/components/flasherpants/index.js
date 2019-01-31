@@ -5,6 +5,7 @@ import css from './style.scss';
 import { Container } from 'reactstrap';
 import { Navbar } from 'reactstrap';
 import { Button, ButtonGroup } from 'reactstrap';
+import { Form } from 'reactstrap';
 
 import units from 'units-css';
 
@@ -22,6 +23,40 @@ function convertMapToObject(map) {
 
   return mapObject;
 }
+
+//!FormInline
+export class FormInline extends React.Component {
+  render() {
+    let { spacing, spacingBottom, ...props } = this.props;
+    let childClassNames = require('classnames')({
+      [`mr-${spacing}`]: (typeof spacing === 'number'),
+      [`mb-${spacing}`]: (spacingBottom === true),
+      [`mb-${spacingBottom}`]: (typeof spacingBottom === 'number')
+    });
+
+    return (
+      <Form {...props} inline={true} className={css.formInlineModule}>
+        {
+          React.Children.map(this.props.children, (child, i) => {
+            return (
+              <child.type {...child.props} {...props} className={childClassNames}>
+                {child.props.children}
+              </child.type>
+            );
+          })
+        }
+      </Form>
+    );
+  }
+}
+
+FormInline.propTypes = {
+  spacing: PropTypes.number,
+  spacingBottom: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number
+  ]),
+};
 
 export class Containment extends React.Component {
   render() {
@@ -114,11 +149,11 @@ export class Buttons extends React.Component {
     return (
       <div className={parentClassNames}>
         {
-          this.props.children.map((child, i) => {
+          React.Children.map(this.props.children, (child, i) => {
             return (
-              <Button key={i} {...child.props} {...props} className={childClassNames}>
+              <child.type {...child.props} {...props} className={childClassNames}>
                 {child.props.children}
-              </Button>
+              </child.type>
             );
           })
         }
@@ -127,9 +162,10 @@ export class Buttons extends React.Component {
   }
 }
 
+//!ButtonsGroup
 export class ButtonsGroup extends React.Component {
   render() {
-    let {vertical, spacing, spacingBottom, color, ...props} = this.props;
+    let {vertical, spacing, spacingBottom, className, color, ...props} = this.props;
     let classNames = require('classnames')({
       [css.buttonsGroupModule]: true,
       [`mr-${spacing}`]: (typeof spacing === 'number'),
@@ -144,11 +180,11 @@ export class ButtonsGroup extends React.Component {
     return (
       <ButtonGroup vertical={vertical} className={classNames}>
         {
-          this.props.children.map((child, i) => {
+          React.Children.map(this.props.children, (child, i) => {
             return (
-              <Button key={i} {...child.props} {...props}>
+              <child.type {...child.props} {...props}>
                 {child.props.children}
-              </Button>
+              </child.type>
             );
           })
         }

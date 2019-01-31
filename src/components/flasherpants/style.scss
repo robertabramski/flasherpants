@@ -3,6 +3,14 @@
   sizesMap: #{$sizes};
 }
 
+:local(.form-inline-module) {
+  input, label, [class^="form"], [role="group"] {
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+}
+
 :local(.containment-module) {
   &[class*="px"] {
     .row {
@@ -24,7 +32,7 @@
 }
 
 :local(.buttons-module) {
-  display: inline-block;
+  display: block;
 
   .btn {
     &:last-child {
